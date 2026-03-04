@@ -39,14 +39,8 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew build
 
-  pull-request:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: pull-request
-    uses: diillson/auto-pull-request@v1.0.1
-    with:
-      destination_branch: "develop"
+    - name: Auto Pull Request
+      uses: diillson/auto-pull-request@latest
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
     # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
