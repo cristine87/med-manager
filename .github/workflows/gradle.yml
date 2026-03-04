@@ -44,12 +44,16 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew build
 
-    - name: Auto Pull Request
-      uses: diillson/auto-pull-request@latest
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v6
       with:
-        destination_branch: "develop"
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: "Seu commit message"
+        title: "Título do PR"
+        body: "Descrição do PR"
+        branch: "nome-da-sua-branch"
+        base: "develop"  # ou a branch de destino
+        
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
     # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
     #
