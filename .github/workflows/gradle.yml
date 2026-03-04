@@ -11,9 +11,7 @@ on:
   push:
     branches: 
       - '**'
-  pull_request:
-    branches:
-      - '**'
+      - '!main'
 
 jobs:
   build:
@@ -32,7 +30,7 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-      
+
     # Configure Gradle for optimal use in GitHub Actions, including caching of downloaded dependencies.
     # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
     - name: Setup Gradle
@@ -40,6 +38,15 @@ jobs:
 
     - name: Build with Gradle Wrapper
       run: ./gradlew build
+
+  pull-request:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: pull-request
+    uses: diillson/auto-pull-request@v1.0.1
+    with:
+      destination_branch: "develop"
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
     # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
